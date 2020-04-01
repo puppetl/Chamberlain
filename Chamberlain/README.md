@@ -2,5 +2,5 @@
 
 项目名--->Chamberlain
 
-应用名--->backend/forend(未创建)
+应用名--->backend/forend
      
