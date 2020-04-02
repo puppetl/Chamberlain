@@ -18,6 +18,10 @@ def leisure(request):  # 查看空闲房
         'article': first_article,
     })
 
+
 def reservation(request):  # 预订
     if request.method == 'POST':
-        wwww=1
+        room_id = request.POST.get('ROOMID')
+        return render(request, 'room_reservation.html', {
+            'roomid': room_id,
+        })
