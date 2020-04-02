@@ -20,4 +20,3 @@ def leisure(request):  # 查看空闲房
 
 def reservation(request):  # 预订
     if request.method == 'POST':
-        request_int = request.form
