@@ -14,4 +14,4 @@ class Article(models.Model):
 
 
     def __str__(self):
-        return self.article_id
+        return self.room_id

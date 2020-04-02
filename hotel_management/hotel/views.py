@@ -25,3 +25,7 @@ def reservation(request):  # 预订
         return render(request, 'room_reservation.html', {
             'roomid': room_id,
         })
+
+
+def retreat(request):  # 退房
+    return render(request, 'room_unreg.html')
