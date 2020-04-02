@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 class Article(models.Model):
     # 房间号
-    article_id = models.AutoField(primary_key=True)
+    room_id = models.AutoField(primary_key=True)
     # 入住人员姓名
     room_name = models.TextField()
     # 入住时间
