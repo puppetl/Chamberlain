@@ -1,8 +1,14 @@
 {#标注这是预订房间页面#}
 <meta charset="UTF-8">
-<form class="navbar-form navbar-left" role="search" action="home_reservation.html">
+<form class="navbar-form navbar-left" role="search" action="{% url 'check' %}">
   <div class="form-group">
     <input type="text" class="form-control" placeholder="请输入预订房间号" name="ROOMID">
   </div>
   <button type="submit" class="btn btn-default">预订</button>
 </form>
+{#以下循环循环所有房间,并且标注结束时间#}
+{% for foo in roomid %}
+    <div><h3>{{ foo.room_id }}</h3>&nbsp;{% if foo.room_timeover %}
+    <a href="/management/people_data/{{ foo.room_id }}">{{ foo.room_timeover }}</a>
+    {% endif %}</div>
+{% endfor %}
