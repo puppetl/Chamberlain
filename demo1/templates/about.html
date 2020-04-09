@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于系统</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <style>
+        .mui-content {
+
+            background: url("/static/img/full_back.png") bottom center no-repeat #efeff4;
+
+            background-size: 100% 100%;
+
+            width: 800px;
+
+            height: 800px;
+
+        }
+    </style>
+</head>
+<body class="mui-content">
+<div class="pull-right">
+    <a href="/home/">返回首页</a>
+</div>
+<br>
+<br>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-4">
+            <div class="panel panel-default ">
+                <div class="panel-heading text-center" style="color: rebeccapurple">小管家预订系统</div>
+                <div class="panel-body">
+                    <h3>酒店管理系统架构</h3>
+                    <p>
+                        本系统基于B/S架构，用python进行开发实现。系统使用（MVC）三层结构进行分层，分别是数据层、业务层和视图层，实现代码的分离。系统还对用户的认证和授权进行了管理，通过认证管理确认帐号是否存在，通过授权管理确认对用户的权限进行控制。
+                    </p>
+                    <h4>视图层</h4>
+                    <p>
+                        视图层负责获取用户的请求和信息的展现，是用户与系统交互的界面，通过Ajax实现数据异步交互，达到界面和控制逻辑的分离。本系统视图层的模块包括：用户登录，用户注册，管理个人信息，预订房间，预订餐饮，管理酒店房间，管理员工信息，安排后勤人员。</p>
+                    <h4>业务层</h4>
+
+                    <p>
+                        业务层是实现系统业务逻辑的核心。负责对业务逻辑代码进行抽象和封装，执行业务逻辑操作，和领域层、数据层关联。业务结果返回给表示层展现。本系统业务层的模块包括：用户登录，用户注册，管理个人信息，预订房间，预订餐饮，管理酒店房间，管理员工信息，安排后勤人员。</p>
+                    <h4>数据层</h4>
+
+                    <p>
+                        数据层负责系统的实体对象的数据访问。本系统数据层的模块包括：用户、管理员、房间、餐饮、订单、酒店员工。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
