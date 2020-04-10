@@ -72,9 +72,7 @@ class Book(models.Model):
         (24, "23:00-0:00"),
         (25, "0:00-12:00"),
         (26, "0:00-24:00"),
-        (27, "一周"),
-        (28, "一月"),
-        (29, "一年"),
+   
     )
 
     time_id = models.IntegerField(choices=time_choice)

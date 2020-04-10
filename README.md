@@ -34,3 +34,9 @@ python manage.py migrate
  python manage.py runserver
 ```
 
+4. 创建 超级用户 使用 **管理登录**, 进行房间/员工 添加, 预约信息查看
+
+```
+python manage.py createsuperuser	 
+```
+
