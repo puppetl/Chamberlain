@@ -17,7 +17,17 @@ class RegForm(forms.Form):
         },
         widget=forms.widgets.TextInput(
             attrs={"class": "form-control"}),
-        )
+    )
+    identity = forms.CharField(
+        max_length=18,
+        label="身份证号",
+        error_messages={
+            "max_length": "身份证号长度错误",
+            "required": "身份证号不能为空"
+        },
+        widget=forms.widgets.TextInput(
+            attrs={"class": "form-control"}),
+    )
     email = forms.EmailField(
         label="邮箱",
 
@@ -77,7 +87,7 @@ class ChangePwdForm(forms.Form):
         label="旧密码",
 
         widget=forms.widgets.PasswordInput(
-            attrs={"class": "form-control","placeholder":"请输入旧密码"}
+            attrs={"class": "form-control", "placeholder": "请输入旧密码"}
         ),
         error_messages={
             "min_length": "密码至少6位",
@@ -88,7 +98,7 @@ class ChangePwdForm(forms.Form):
         min_length=6,
         label="新密码",
         widget=forms.widgets.PasswordInput(
-            attrs={"class": "form-control","placeholder":"请输入新密码"}
+            attrs={"class": "form-control", "placeholder": "请输入新密码"}
         ),
         error_messages={
             "min_length": "密码至少6位",
@@ -100,7 +110,7 @@ class ChangePwdForm(forms.Form):
         min_length=6,
         label="确认密码",
         widget=forms.widgets.PasswordInput(
-            attrs={"class": "form-control","placeholder":"请输入确认密码"}
+            attrs={"class": "form-control", "placeholder": "请输入确认密码"}
         ),
         error_messages={
             "min_length": "密码至少6位",

@@ -85,6 +85,15 @@
                         <span class="help-block">{{ form_obj.re_password.errors.0 }}</span>
                     </div>
                 </div>
+                <!--身份证号-->
+                <div class="form-group">
+                    <label for="{{ form_obj.identity.id_for_label }}"
+                           class="col-sm-2 control-label">{{ form_obj.identity.label }}</label>
+                    <div class="col-sm-8">
+                        {{ form_obj.identity }}
+                        <span class="help-block">{{ form_obj.identity.errors.0 }}</span>
+                    </div>
+                </div>
                 <!--注册-->
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-12">
@@ -92,7 +101,6 @@
                         <input type="reset" class="btn btn-danger" value="重置">&nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="panel-warning" href="/home/">返回首页</a>
                     </div>
-
                 </div>
             </form>
         </div>
@@ -121,6 +129,7 @@
         // 取到用户填写的注册数据，向后端发送AJAX请求
         var formData = new FormData();
         formData.append("username", $("#id_username").val());
+        formData.append("identity", $("#id_identity").val());
         formData.append("password", $("#id_password").val());
         formData.append("re_password", $("#id_re_password").val());
         formData.append("email", $("#id_email").val());
