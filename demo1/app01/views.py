@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from geetest import GeetestLib
@@ -7,8 +7,9 @@ from app01 import models
 from app01 import forms
 import json
 import datetime
-# Create your views here.
 
+
+# Create your views here.
 
 
 def acc_login(request):
@@ -29,13 +30,16 @@ def acc_login(request):
         else:
             result = gt.failback_validate(challenge, validate, seccode)
         print("####################", result)
+        print('type(username)', type(username))
+        print('username', username)
+        print('password', password)
         if result:
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
                 res["msg"] = "/index/"
             else:
-                res["status"] =1
+                res["status"] = 1
                 res["msg"] = "认证失败,请检查用户名及密码是否正确"
         else:
             res["status"] = 1
@@ -47,12 +51,11 @@ def acc_login(request):
 
 @login_required(login_url="/login/")
 def index(request):
-
     date = datetime.datetime.now().date()
     # 如果没有指定日期，默认使用当天日期
-    book_date = request.GET.get("book_date",date)
+    book_date = request.GET.get("book_date", date)
     print('日期：', request.GET.get("book_date"))
-    print("book_date",book_date)
+    print("book_date", book_date)
     # 获取会议室时间段列表
     time_choice = models.Book.time_choice
     print(time_choice)
@@ -60,9 +63,9 @@ def index(request):
     room_list = models.Room.objects.all()
     # 获取房间预订信息
     book_list = models.Book.objects.filter(date=book_date)
-    htmls=''
+    htmls = ''
     for room in room_list:
-        htmls += '<tr><td>{}({})</td>'.format(room.caption,room.num)
+        htmls += '<tr><td>{}({})</td>'.format(room.caption, room.num)
         for time in time_choice:
             # 判断该单元格是否被预订
             flag = False
@@ -74,15 +77,16 @@ def index(request):
             if flag:
                 # 判断当前登录人与预订房间的人是否一致，一致使用info样式
                 if request.user.username == book.user.username:
-                    htmls += '<td class="info item"  room_id={} time_id={}>{}</td>'.format(room.pk, time[0],book.user.username)
+                    htmls += '<td class="info item"  room_id={} time_id={}>{}</td>'.format(room.pk, time[0],
+                                                                                           book.user.username)
                 else:
                     htmls += '<td class="success item"  room_id={} time_id={}>{}</td>'.format(room.pk, time[0],
-                                                                                         book.user.username)
+                                                                                              book.user.username)
 
             else:
-                htmls += '<td class="item"  room_id={} time_id={}></td>'.format(room.pk,time[0])
+                htmls += '<td class="item"  room_id={} time_id={}></td>'.format(room.pk, time[0])
         htmls += "</tr>"
-    return render(request,'index.html',{"time_choice":time_choice,"htmls":htmls,})
+    return render(request, 'index.html', {"time_choice": time_choice, "htmls": htmls, })
 
 
 @login_required(login_url="/login/")
@@ -96,7 +100,7 @@ def book(request):
             # 向数据库修改房间预订记录
             post_data = json.loads(request.POST.get("post_data"))
             if not post_data["ADD"] and not post_data["DEL"]:
-                res = {"status":2, "msg":""}
+                res = {"status": 2, "msg": ""}
                 return HttpResponse(json.dumps(res))
             user = request.user
             print(type(post_data), post_data)
@@ -111,7 +115,7 @@ def book(request):
             # 删除旧的预订信息
             from django.db.models import Q
             remove_book = Q()
-            for room_id,time_id_list in post_data["DEL"].items():
+            for room_id, time_id_list in post_data["DEL"].items():
                 temp = Q()
                 for time_id in time_id_list:
                     temp.children.append(("room_id", room_id))
@@ -149,7 +153,7 @@ def reg(request):
             form_obj.cleaned_data.pop("re_password")
             print(form_obj.cleaned_data)
             try:
-                models.UserInfo.objects.create_user(**form_obj.cleaned_data,avatar=avatar_img)
+                models.UserInfo.objects.create_user(**form_obj.cleaned_data, avatar=avatar_img)
             except Exception as e:
                 print(e)
             ret["msg"] = "/login/"
@@ -164,20 +168,22 @@ def reg(request):
             # 生成一个form对象
     form_obj = forms.RegForm()
     print(form_obj.fields)
-    return render(request,'reg.html',{"form_obj": form_obj})
+    return render(request, 'reg.html', {"form_obj": form_obj})
 
 
 def home(request):
     # 获取当前用户的预订信息
     date = datetime.datetime.now().date()
-    print(date,type(date))
+    print(date, type(date))
     user = request.user
     if user.is_authenticated:
         book_ret = models.Book.objects.filter(user=user, date__gte=date).count()
     else:
         book_ret = None
     print(book_ret)
-    return render(request,'home.html',{"book_ret":book_ret})
+    return render(request, 'home.html', {"book_ret": book_ret})
+
+
 # 请在官网申请ID使用，示例ID不可使用
 pc_geetest_id = "b46d1900d0a894591916ea94ea91bd2c"
 pc_geetest_key = "36fc3fe98530eea08dfc6ce76e3d24c4"
@@ -216,15 +222,15 @@ def change_password(request):
                 user_obj.set_password(new_password)
                 user_obj.save()
                 msg = "/login/"
-        return render(request, 'change_password.html', {"username":username,"msg":msg,"form_obj":form_obj})
+        return render(request, 'change_password.html', {"username": username, "msg": msg, "form_obj": form_obj})
         print(request.POST)
     form_obj = forms.ChangePwdForm()
-    return render(request,'change_password.html',{"username":username,"form_obj":form_obj})
+    return render(request, 'change_password.html', {"username": username, "form_obj": form_obj})
 
 
 def test(request):
-    return render(request,'轮播图.html')
+    return render(request, '轮播图.html')
 
 
 def about(request):
-    return render(request,'about.html')
+    return render(request, 'about.html')
