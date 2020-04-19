@@ -14,7 +14,7 @@ import datetime
 
 def acc_login(request):
     if request.method == "POST":
-        print(request.POST)
+        # print(request.POST)
         res = {"status": 0, "msg": ""}
         username = request.POST.get("username")
         password = request.POST.get("pwd")
@@ -29,10 +29,10 @@ def acc_login(request):
             result = gt.success_validate(challenge, validate, seccode, user_id)
         else:
             result = gt.failback_validate(challenge, validate, seccode)
-        print("####################", result)
-        print('type(username)', type(username))
-        print('username', username)
-        print('password', password)
+        # print("####################", result)
+        # print('type(username)', type(username))
+        # print('username', username)
+        # print('password', password)
         if result:
             user = authenticate(username=username, password=password)
             if user:
@@ -44,7 +44,7 @@ def acc_login(request):
         else:
             res["status"] = 1
             res["msg"] = "验证码错误"
-        print("**************", res)
+        # print("**************", res)
         return JsonResponse(res)
     return render(request, 'login.html')
 
@@ -54,11 +54,11 @@ def index(request):
     date = datetime.datetime.now().date()
     # 如果没有指定日期，默认使用当天日期
     book_date = request.GET.get("book_date", date)
-    print('日期：', request.GET.get("book_date"))
-    print("book_date", book_date)
+    # print('日期：', request.GET.get("book_date"))
+    # print("book_date", book_date)
     # 获取会议室时间段列表
     time_choice = models.Book.time_choice
-    print(time_choice)
+    # print(time_choice)
     # 获取会议室列表
     room_list = models.Room.objects.all()
     # 获取房间预订信息
@@ -93,7 +93,7 @@ def index(request):
 def book(request):
     if request.method == "POST":
         choose_date = request.POST.get("choose_date")
-        print("choose_date:", choose_date)
+        # print("choose_date:", choose_date)
         # 获取房间时间段列表
         time_choice = models.Book.time_choice
         try:
@@ -103,7 +103,7 @@ def book(request):
                 res = {"status": 2, "msg": ""}
                 return HttpResponse(json.dumps(res))
             user = request.user
-            print(type(post_data), post_data)
+            # print(type(post_data), post_data)
             # 添加新的预订信息
             book_list = []
             for room_id, time_id_list in post_data["ADD"].items():
@@ -142,16 +142,16 @@ def reg(request):
     if request.method == "POST":
         ret = {"status": 0, "msg": ""}
         form_obj = forms.RegForm(request.POST)
-        print('request.POST'.center(80, '#'))
-        print(request.POST)
-        print('request.POST'.center(80, '#'))
+        # print('request.POST'.center(80, '#'))
+        # print(request.POST)
+        # print('request.POST'.center(80, '#'))
         avatar_img = request.FILES.get("avatar")
-        print(avatar_img)
+        # print(avatar_img)
         # 帮我做校验
         if form_obj.is_valid():
             # 校验通过，去数据库创建一个新的用户
             form_obj.cleaned_data.pop("re_password")
-            print(form_obj.cleaned_data)
+            # print(form_obj.cleaned_data)
             try:
                 models.UserInfo.objects.create_user(**form_obj.cleaned_data, avatar=avatar_img)
             except Exception as e:
@@ -159,15 +159,15 @@ def reg(request):
             ret["msg"] = "/login/"
             return JsonResponse(ret)
         else:
-            print(form_obj.errors)
+            # print(form_obj.errors)
             ret["status"] = 1
             ret["msg"] = form_obj.errors
-            print(ret)
-            print("=" * 120)
+            # print(ret)
+            # print("=" * 120)
             return JsonResponse(ret)
             # 生成一个form对象
     form_obj = forms.RegForm()
-    print(form_obj.fields)
+    # print(form_obj.fields)
     return render(request, 'reg.html', {"form_obj": form_obj})
 
 
