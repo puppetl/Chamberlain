@@ -18,16 +18,6 @@ class RegForm(forms.Form):
         widget=forms.widgets.TextInput(
             attrs={"class": "form-control"}),
     )
-    identity = forms.CharField(
-        max_length=18,
-        label="身份证号",
-        error_messages={
-            "max_length": "身份证号长度错误",
-            "required": "身份证号不能为空"
-        },
-        widget=forms.widgets.TextInput(
-            attrs={"class": "form-control"}),
-    )
     email = forms.EmailField(
         label="邮箱",
 
