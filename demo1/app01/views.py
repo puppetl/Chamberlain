@@ -29,10 +29,10 @@ def acc_login(request):
             result = gt.success_validate(challenge, validate, seccode, user_id)
         else:
             result = gt.failback_validate(challenge, validate, seccode)
-        # print("####################", result)
-        # print('type(username)', type(username))
-        # print('username', username)
-        # print('password', password)
+        print("####################", result)
+        print('type(username)', type(username))
+        print('username', username)
+        print('password', password)
         if result:
             user = authenticate(username=username, password=password)
             if user:
