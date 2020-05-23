@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'zh-hans'
 
 # TIME_ZONE = 'UTC'
-# 修改数据库时间
+
 TIME_ZONE = 'Asia/Shanghai'
 USE_TZ = False
 
