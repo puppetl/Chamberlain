@@ -19,7 +19,7 @@ PyMySQL==0.9.3
 pyparsing==2.4.6
 python-dateutil==2.8.1
 pytz==2019.3
-PyYAML==5.3
+PyYAML==5.4
 requests==2.22.0
 shellescape==3.8.1
 six==1.14.0
