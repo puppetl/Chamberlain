@@ -4,7 +4,7 @@ chardet==3.0.4
 colorama==0.4.3
 crypto==1.4.1
 cycler==0.10.0
-Django==3.0.3
+Django==3.0.14
 django-crontab==0.7.1
 geetest==3.2.1
 idna==2.8
